@@ -1,18 +1,18 @@
-/* global describe, expect, it */
-
-const PxParser = require('../lib/PxParser')
+const { deepStrictEqual, strictEqual } = require('assert')
 const getStream = require('get-stream')
+const { describe, it } = require('mocha')
+const PxParser = require('../lib/PxParser')
 
 describe('PxParser', () => {
   it('should be a constructor', () => {
-    expect(typeof PxParser).toBe('function')
+    strictEqual(typeof PxParser, 'function')
   })
 
   describe('import', () => {
     it('should be a method', () => {
       const parser = new PxParser()
 
-      expect(typeof parser.import).toBe('function')
+      strictEqual(typeof parser.import, 'function')
     })
 
     it('should parse the key', async () => {
@@ -22,10 +22,10 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].keyword).toBe('KEY')
-      expect(pairs[0].subkey).toBe('')
-      expect(pairs[0].language).toBe('')
+      strictEqual(pairs.length, 1)
+      strictEqual(pairs[0].keyword, 'KEY')
+      strictEqual(pairs[0].subkey, '')
+      strictEqual(pairs[0].language, '')
     })
 
     it('should parse the subkey', async () => {
@@ -35,10 +35,10 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].keyword).toBe('KEY')
-      expect(pairs[0].subkey).toBe('SUBKEY')
-      expect(pairs[0].language).toBe('')
+      strictEqual(pairs.length, 1)
+      strictEqual(pairs[0].keyword, 'KEY')
+      strictEqual(pairs[0].subkey, 'SUBKEY')
+      strictEqual(pairs[0].language, '')
     })
 
     it('should parse the language', async () => {
@@ -48,10 +48,10 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].keyword).toBe('KEY')
-      expect(pairs[0].subkey).toBe('')
-      expect(pairs[0].language).toBe('de')
+      strictEqual(pairs.length, 1)
+      strictEqual(pairs[0].keyword, 'KEY')
+      strictEqual(pairs[0].subkey, '')
+      strictEqual(pairs[0].language, 'de')
     })
 
     it('should parse the subkey and language', async () => {
@@ -61,10 +61,10 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].keyword).toBe('KEY')
-      expect(pairs[0].subkey).toBe('SUBKEY')
-      expect(pairs[0].language).toBe('de')
+      strictEqual(pairs.length, 1)
+      strictEqual(pairs[0].keyword, 'KEY')
+      strictEqual(pairs[0].subkey, 'SUBKEY')
+      strictEqual(pairs[0].language, 'de')
     })
 
     it('should parse a value', async () => {
@@ -74,8 +74,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['VALUE'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['VALUE'])
     })
 
     it('should parse a quoted value', async () => {
@@ -85,8 +85,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['VALUE'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['VALUE'])
     })
 
     it('should parse a quoted value that contains a semicolon', async () => {
@@ -96,8 +96,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['VALUE;ABC'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['VALUE;ABC'])
     })
 
     it('should parse multiple values', async () => {
@@ -107,8 +107,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['VALUE A', 'VALUE B'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['VALUE A', 'VALUE B'])
     })
 
     it('should parse multi quoted value', async () => {
@@ -118,8 +118,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['VALUE A'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['VALUE A'])
     })
 
     it('should parse multiple pairs', async () => {
@@ -129,16 +129,16 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(2)
-      expect(pairs[0].keyword).toBe('KEY_A')
-      expect(pairs[0].subkey).toBe('')
-      expect(pairs[0].language).toBe('')
-      expect(pairs[0].values).toEqual(['B C'])
+      strictEqual(pairs.length, 2)
+      strictEqual(pairs[0].keyword, 'KEY_A')
+      strictEqual(pairs[0].subkey, '')
+      strictEqual(pairs[0].language, '')
+      deepStrictEqual(pairs[0].values, ['B C'])
 
-      expect(pairs[1].keyword).toBe('KEY_D')
-      expect(pairs[1].subkey).toBe('SUBKEY_E')
-      expect(pairs[1].language).toBe('de')
-      expect(pairs[1].values).toEqual(['F', 'G'])
+      strictEqual(pairs[1].keyword, 'KEY_D')
+      strictEqual(pairs[1].subkey, 'SUBKEY_E')
+      strictEqual(pairs[1].language, 'de')
+      deepStrictEqual(pairs[1].values, ['F', 'G'])
     })
 
     it('should split DATA values separated by space', async () => {
@@ -148,8 +148,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['1', '2', '3'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['1', '2', '3'])
     })
 
     it('should split DATA values separated by line breaks', async () => {
@@ -159,8 +159,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['1', '2', '3'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['1', '2', '3'])
     })
 
     it('should support quoted DATA values', async () => {
@@ -170,8 +170,8 @@ describe('PxParser', () => {
 
       const pairs = await getStream.array(parser)
 
-      expect(pairs.length).toBe(1)
-      expect(pairs[0].values).toEqual(['1', '2', '3'])
+      strictEqual(pairs.length, 1)
+      deepStrictEqual(pairs[0].values, ['1', '2', '3'])
     })
   })
 })
