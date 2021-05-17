@@ -1,6 +1,6 @@
 @prefix cube: <https://cube.link/>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix scale: <http://ns.bergnet.org/cube/scale/>.
+@prefix qudt: <http://qudt.org/schema/qudt/>.
 @prefix schema: <http://schema.org/>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
@@ -30,7 +30,7 @@
     sh:minCount 1;
     sh:maxCount 1;
     sh:in (<http://example.org/simple/dimension/0/0> <http://example.org/simple/dimension/0/1>);
-    scale:scaleOfMeasure scale:Categorical
+    qudt:scaleType qudt:NominalScale
   ], [
     schema:name "Wert"@de;
     schema:name "Valeur"@fr;
@@ -38,7 +38,7 @@
     sh:nodeKind sh:Literal;
     sh:minCount 1;
     sh:maxCount 1;
-    scale:scaleOfMeasure scale:Numerical
+    qudt:scaleType qudt:RatioScale
   ].
 
 <http://example.org/simple/dimension/0/0>

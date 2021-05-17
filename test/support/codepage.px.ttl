@@ -1,6 +1,6 @@
 @prefix cube: <https://cube.link/>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix scale: <http://ns.bergnet.org/cube/scale/>.
+@prefix qudt: <http://qudt.org/schema/qudt/>.
 @prefix schema: <http://schema.org/>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
 
@@ -28,7 +28,7 @@
     sh:maxCount 1;
     sh:minCount 1;
     sh:in (<http://example.org/simple/dimension/0/0> <http://example.org/simple/dimension/0/1>);
-    scale:scaleOfMeasure scale:Categorical
+    qudt:scaleType qudt:NominalScale
   ], [
     schema:name "Kanton"@de, "Canton"@fr;
     sh:path <http://example.org/simple/dimension/1>;
@@ -36,14 +36,14 @@
     sh:maxCount 1;
     sh:minCount 1;
     sh:in (<http://example.org/simple/dimension/1/0> <http://example.org/simple/dimension/1/1>);
-    scale:scaleOfMeasure scale:Categorical
+    qudt:scaleType qudt:NominalScale
   ], [
     schema:name "Wert"@de, "Valeur"@fr;
     sh:path <http://example.org/simple/measure/0>;
     sh:nodeKind sh:Literal;
     sh:maxCount 1;
     sh:minCount 1;
-    scale:scaleOfMeasure scale:Numerical
+    qudt:scaleType qudt:RatioScale
   ].
 
 <http://example.org/simple/dimension/0/0>
