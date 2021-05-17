@@ -26,6 +26,16 @@ describe('rdf-parser-px', () => {
     strictEqual(dataset.toCanonical(), expected.toCanonical())
   })
 
+  it('should convert the simple example with the given observer to RDF', async () => {
+    const expected = await rdf.dataset().import(fromFile('test/support/simple.px.observer.ttl'))
+    const pxStream = fs.createReadStream('test/support/simple.px')
+
+    const parser = new RdfPxParser({ baseIRI: 'http://example.org/simple/', observer: 'http://example.org/simple/observer' })
+    const dataset = await rdf.dataset().import(parser.import(pxStream))
+
+    strictEqual(dataset.toCanonical(), expected.toCanonical())
+  })
+
   it('converts the heading example to RDF and spreads the values', async () => {
     const expected = await rdf.dataset().import(fromFile('test/support/heading.px.ttl'))
     const pxStream = fs.createReadStream('test/support/heading.px')
