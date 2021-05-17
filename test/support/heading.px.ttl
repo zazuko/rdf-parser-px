@@ -22,11 +22,6 @@
     sh:maxCount 1;
     sh:in (cube:Observation)
   ], [
-    sh:path cube:observedBy;
-    sh:nodeKind sh:IRI;
-    sh:minCount 1;
-    sh:maxCount 1
-  ], [
     schema:name "Jahr"@de;
     sh:path <http://example.org/simple/dimension/0>;
     sh:nodeKind sh:IRI;

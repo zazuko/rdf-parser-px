@@ -18,11 +18,6 @@
     sh:maxCount 1;
     sh:in (cube:Observation)
   ], [
-    sh:path cube:observedBy;
-    sh:nodeKind sh:IRI;
-    sh:minCount 1;
-    sh:maxCount 1
-  ], [
     schema:name "Kanton"@de;
     schema:name "Canton"@fr;
     sh:path <http://example.org/simple/dimension/0>;

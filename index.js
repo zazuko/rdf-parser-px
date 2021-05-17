@@ -10,7 +10,7 @@ class RdfPxParser {
 
   import (stream) {
     const builder = new RdfBuilder({ ...this.options })
-    const cube = new PxCube()
+    const pxCube = new PxCube()
 
     Promise.resolve().then(async () => {
       try {
@@ -21,10 +21,10 @@ class RdfPxParser {
 
         const pairs = await getStream.array(parser)
 
-        pairs.forEach(pair => cube.addPair(pair))
-        cube.finished()
+        pairs.forEach(pair => pxCube.addPair(pair))
+        pxCube.finished()
 
-        builder.import(cube)
+        builder.import(pxCube)
       } catch (err) {
         builder.emit('error', err)
       }
