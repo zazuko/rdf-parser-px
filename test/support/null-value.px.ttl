@@ -1,0 +1,56 @@
+@prefix cube: <https://cube.link/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix qudt: <http://qudt.org/schema/qudt/>.
+@prefix schema: <http://schema.org/>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://example.org/simple> a cube:Cube;
+  cube:observationConstraint <http://example.org/simple/shape>;
+  cube:observationSet <http://example.org/simple/observation/>.
+
+<http://example.org/simple/shape> a sh:NodeShape, cube:Constraint;
+  sh:closed true;
+  sh:property [
+    sh:path rdf:type;
+    sh:nodeKind sh:IRI;
+    sh:minCount 1;
+    sh:maxCount 1;
+    sh:in (cube:Observation)
+  ], [
+    schema:name "Kanton"@de;
+    schema:name "Canton"@fr;
+    sh:path <http://example.org/simple/dimension/0>;
+    sh:nodeKind sh:IRI;
+    sh:minCount 1;
+    sh:maxCount 1;
+    sh:in (<http://example.org/simple/dimension/0/0> <http://example.org/simple/dimension/0/1>);
+    qudt:scaleType qudt:NominalScale
+  ], [
+    schema:name "Wert"@de;
+    schema:name "Valeur"@fr;
+    sh:path <http://example.org/simple/measure/0>;
+    sh:nodeKind sh:Literal;
+    sh:minCount 1;
+    sh:maxCount 1;
+    qudt:scaleType qudt:RatioScale
+  ].
+
+<http://example.org/simple/dimension/0/0>
+  schema:name "Schweiz"@de, "Suisse"@fr.
+
+<http://example.org/simple/dimension/0/1>
+  schema:name "Bern / Berne"@de, "Bern / Berne"@fr.
+
+<http://example.org/simple/observation/> a cube:ObservationSet;
+  cube:observation
+    <http://example.org/simple/observation/0>,
+    <http://example.org/simple/observation/1>.
+
+<http://example.org/simple/observation/0> a cube:Observation;
+  <http://example.org/simple/dimension/0> <http://example.org/simple/dimension/0/0>;
+  <http://example.org/simple/measure/0> ""^^cube:Undefined.
+
+<http://example.org/simple/observation/1> a cube:Observation;
+  <http://example.org/simple/dimension/0> <http://example.org/simple/dimension/0/1>;
+  <http://example.org/simple/measure/0> "200"^^xsd:decimal.

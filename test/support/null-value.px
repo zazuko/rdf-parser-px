@@ -1,0 +1,14 @@
+CHARSET="ANSI";
+LANGUAGE="de";
+LANGUAGES="de","fr";
+DECIMALS=2;
+STUB="Kanton";
+STUB[fr]="Canton";
+HEADING="Variable";
+HEADING[fr]="Variable";
+VALUES("Kanton")="Schweiz","Bern / Berne";
+VALUES[fr]("Canton")="Suisse","Bern / Berne";
+VALUES("Variable")="Wert";
+VALUES[fr]("Variable")="Valeur";
+DATA=
+... 200;
