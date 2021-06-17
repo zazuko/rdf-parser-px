@@ -104,4 +104,14 @@ describe('rdf-parser-px', () => {
       await getStream.array(quadStream)
     })
   })
+
+  it('should convert the null value example and replace the given null values with cube:Undefined', async () => {
+    const expected = await rdf.dataset().import(fromFile('test/support/null-value.px.ttl'))
+    const pxStream = fs.createReadStream('test/support/null-value.px')
+
+    const parser = new RdfPxParser({ baseIRI: 'http://example.org/simple/', nullValue: '...' })
+    const dataset = await rdf.dataset().import(parser.import(pxStream))
+
+    strictEqual(dataset.toCanonical(), expected.toCanonical())
+  })
 })
