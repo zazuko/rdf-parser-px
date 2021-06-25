@@ -31,7 +31,11 @@
     schema:name "Valeur"@fr;
     sh:path <http://example.org/simple/measure/0>;
     sh:nodeKind sh:Literal;
-    sh:datatype xsd:decimal;
+    sh:or([
+      sh:datatype xsd:decimal
+    ] [
+      sh:datatype cube:Undefined
+    ]);
     sh:minCount 1;
     sh:maxCount 1;
     sh:minInclusive "200"^^xsd:decimal;
