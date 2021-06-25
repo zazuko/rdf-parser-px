@@ -3,6 +3,7 @@
 @prefix qudt: <http://qudt.org/schema/qudt/>.
 @prefix schema: <http://schema.org/>.
 @prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
 <http://example.org/simple> a cube:Cube;
   cube:observationConstraint <http://example.org/simple/shape>;
@@ -36,8 +37,11 @@
     schema:name "Wert"@de, "Valeur"@fr;
     sh:path <http://example.org/simple/measure/0>;
     sh:nodeKind sh:Literal;
+    sh:datatype xsd:decimal;
     sh:maxCount 1;
     sh:minCount 1;
+    sh:minInclusive "1"^^xsd:decimal;
+    sh:maxInclusive "4"^^xsd:decimal;
     qudt:scaleType qudt:RatioScale
   ].
 

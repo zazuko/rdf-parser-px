@@ -25,6 +25,7 @@
   "homepage": "https://github.com/zazuko/rdf-parser-px",
   "dependencies": {
     "@rdfjs/namespace": "^1.0.0",
+    "@rdfjs/term-map": "^1.0.1",
     "clownface": "^1.2.0",
     "commander": "^3.0.2",
     "get-stream": "^5.1.0",

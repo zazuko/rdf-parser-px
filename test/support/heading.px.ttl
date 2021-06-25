@@ -49,15 +49,21 @@
     schema:name "Anzahl"@de;
     sh:path <http://example.org/simple/measure/0>;
     sh:nodeKind <http://www.w3.org/ns/shacl#Literal>;
+    sh:datatype xsd:decimal;
     sh:minCount 1;
     sh:maxCount 1;
+    sh:minInclusive "1"^^xsd:decimal;
+    sh:maxInclusive "15"^^xsd:decimal;
     qudt:scaleType qudt:RatioScale
   ], [
     schema:name "Prozent"@de;
     sh:path <http://example.org/simple/measure/1>;
     sh:nodeKind <http://www.w3.org/ns/shacl#Literal>;
+    sh:datatype xsd:decimal;
     sh:minCount 1;
     sh:maxCount 1;
+    sh:minInclusive "2"^^xsd:decimal;
+    sh:maxInclusive "16"^^xsd:decimal;
     qudt:scaleType qudt:RatioScale
   ].
 
